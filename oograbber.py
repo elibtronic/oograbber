@@ -10,7 +10,7 @@ import os
 import shutil
 import urllib
 import urllib2
-tree = etree.parse('OO - Dublin Core Export.asp.xml')
+tree = etree.parse('parse_me.xml')
 fail_file = open('failed_item_dl.log','w')
 jpg_fail_file = open('failed_jpg_items.log','w')
 root = tree.getroot()
