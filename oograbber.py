@@ -11,17 +11,15 @@ def try_jpg():
     print("trying to download simple jpg and build metadata")
     listing = os.listdir("data/temp")
     for infile in listing:
-        print "Working on: ",infile
         cf = open("data/temp/" + infile + "/contents", "r")
         data_url = cf.read()
         cf.close()
-        req = urllib2.Request(data_url)
-        req.add_header('User-Agent','Mozilla/5.0')
-        page = urllib2.urlopen(req)
-        textw = str(page.read())
-        
         #easiest strategy
         try:
+            req = urllib2.Request(data_url)
+            req.add_header('User-Agent','Mozilla/5.0')
+            page = urllib2.urlopen(req)
+            textw = str(page.read())
             matcher = re.search('(<a\shref=\"([^\"]*)\">Full Image<\/a>)',textw)
             req = urllib2.Request(str.lower(matcher.group(2)))
             req.add_header('User-Agent','Mozilla/5.0')
@@ -35,9 +33,9 @@ def try_jpg():
             cf.write(filename_for_contents)
             cf.close()
             os.rename("data/temp/" + infile, "data/done_easy/" + infile)
-            print "Download Completed JPG: data/temp/" + infile
+            print "Download Completed JPG: " + infile
         except:
-            print "No Easy JPEG: data/temp/" + infile
+            print "No Easy JPEG: " + infile
             
             
 #Try PDF's second
@@ -46,17 +44,15 @@ def try_pdf():
 
     listing = os.listdir("data/temp")
     for infile in listing:
-        print "Working on: ",infile
         cf = open("data/temp/" + infile + "/contents", "r")
         data_url = cf.read()
         cf.close()
-        req = urllib2.Request(data_url)
-        req.add_header('User-Agent','Mozilla/5.0')
-        page = urllib2.urlopen(req)
-        textw = str(page.read())
-        
         #PDF
         try:
+            req = urllib2.Request(data_url)
+            req.add_header('User-Agent','Mozilla/5.0')
+            page = urllib2.urlopen(req)
+            textw = str(page.read())
             matcher = re.search('(http://images.ourontario.ca/Partners/\w{3}/[A-Za-z0-9]*.pdf)',textw)
             req = urllib2.Request(str.lower(matcher.group(0)))
             filename = matcher.group(0).rsplit('/')[5]
@@ -66,9 +62,9 @@ def try_pdf():
             cf.write(filename)
             cf.close()
             os.rename("data/temp/" + infile, "data/done_pdf/" + infile)
-            print "Download Completed PDF: data/temp/" + infile
+            print "Download Completed PDF: " + infile
         except:
-            print "No PDF: data/temp/" + infile
+            print "No PDF: " + infile
             
             
 
@@ -77,17 +73,16 @@ def try_hard_jpg():
     print("trying to download tricky jpgs and metadata")
     listing = os.listdir("data/temp")
     for infile in listing:
-        print "Working on: ",infile
         cf = open("data/temp/" + infile + "/contents", "r")
         data_url = cf.read()
         cf.close()
-        req = urllib2.Request(data_url)
-        req.add_header('User-Agent','Mozilla/5.0')
-        page = urllib2.urlopen(req)
-        textw = str(page.read())
-        
         #tough JPG
         try:
+            req = urllib2.Request(data_url)
+            req.add_header('User-Agent','Mozilla/5.0')
+            page = urllib2.urlopen(req)
+            textw = str(page.read())      
+
             matcher = re.search('(http://images.ourontario.ca/Partners/\w{3}/[A-Za-z0-9]*.jpg)',textw)
             filename = re.sub('.jpg','f.jpg', matcher.group(0).rsplit('/')[5])
             complete_url = re.sub('.jpg', 'f.jpg',matcher.group(0))
@@ -98,9 +93,9 @@ def try_hard_jpg():
             cf.write(filename)
             cf.close()
             os.rename("data/temp/" + infile, "data/done_hard/" + infile)
-            print "Download Completed Tough JPG: data/temp/" + infile
+            print "Download Completed Tough JPG: " + infile
         except:
-            print "No Tough JPG: data/temp/" + infile
+            print "No Tough JPG: " + infile
             
             
 
