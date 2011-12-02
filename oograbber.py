@@ -129,6 +129,10 @@ def prep_data():
                 current_str += '<dcvalue element="type" qualifier="none">'+value.text.strip()+'</dcvalue>\n'
             if (pair[1] == 'langauge'):
                 current_str += '<dcvalue element="language" qualifier="none">'+value.text.strip()+'</dcvalue>\n'
+            if (pair[1] == 'description'):
+                current_str += '<dcvalue element="description" qualifer="none">'+value.text.strip().encode('utf8')+'</dcvalue>\n'
+            if (pair[1] == 'creator'):
+                current_str += '<dcvalue element="creator" qualifer="none">'+value.text.strip()+'</dcvalue>\n'
 
         current_str += "</dublin_core>\n"
         mf = open("data/temp/"+id[4]+"/dublin_core.xml","w")
@@ -142,7 +146,7 @@ def prep_data():
     
 
 print('Starting oograber...')
-#prep_data()
+prep_data()
 try_jpg()
 try_pdf()
 try_hard_jpg()
